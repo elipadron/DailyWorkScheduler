@@ -1,26 +1,26 @@
-// Wrapped all code that interacts with the DOM in a call to jQuery to ensure that
-// the code isn't run until the browser has finished rendering all the elements
+
 $(document).ready(function () {
 
   // Display current day 
   var currentDay = dayjs().format('dddd, MMMM D YYYY');
   $('#currentDay').text(currentDay);
 
-  //
+  
   var appointmentMessageElement = $('#appointmentMessage');
 
   var timeBlocksContainer = $('#timeBlocks');
 
+  //Event handler
   timeBlocksContainer.on('click', '.saveBtn', function() {
     var timeBlockId = $(this).closest('.time-block').attr('id');// used to identify the time block. 
     var userInput = $(this).prev('.description').val(); //when user clicks on this saved button all elements within description to be saved to local storage
-    localStorage.setItem(timeBlockId, userInput); //these are the values 
+    localStorage.setItem(timeBlockId, userInput); 
 
     // Display the appointment message
     appointmentMessageElement.text('Your appointment has been added to local storage!');
   });
 
-  // Load saved user inputs from local storage and display them in the corresponding textareas
+  // Load saved user inputs from local storage and display them in the corresponding text areas
   for (var hour = 9; hour <= 17; hour++) {
     var timeBlockId = 'hour-' + hour;
     var savedInput = localStorage.getItem(timeBlockId);
