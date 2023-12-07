@@ -11,10 +11,12 @@ $(document).ready(function () {
 
   // Generate time blocks
   var timeBlocksContainer = $('#timeBlocks');
+  
 
   for (var hour = 9; hour <= 17; hour++) {
     var timeId = 'hour-' + hour;
     var timeClass = (hour < dayjs().hour()) ? 'past' : ((hour === dayjs().hour()) ? 'present' : 'future');
+    var displayHour = (hour > 12) ? hour - 12 : hour;
 
     var timeBlock = $('<div>', {
       id: timeId,
@@ -23,7 +25,7 @@ $(document).ready(function () {
 
     timeBlock.append($('<div>', {
       class: 'col-2 col-md-1 hour text-center py-3',
-      text: hour + ' AM'
+      text: displayHour + ((hour >= 12) ? ' PM' : ' AM') //if else statement 
     }));
 
     timeBlock.append($('<textarea>', {
